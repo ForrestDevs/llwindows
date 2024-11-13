@@ -3,9 +3,8 @@ import type { Post, ArchiveBlock as ArchiveBlockProps } from '@/payload-types'
 import configPromise from '@payload-config'
 import { getPayloadHMR } from '@payloadcms/next/utilities'
 import React from 'react'
-import RichText from '@/components/RichText'
-
-import { CollectionArchive } from '@/components/CollectionArchive'
+import RichText from '@/payload/components/RichText'
+import { CollectionArchive } from '@/payload/components/CollectionArchive'
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
