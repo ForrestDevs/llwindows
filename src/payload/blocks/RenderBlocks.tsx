@@ -8,6 +8,9 @@ import { CallToActionBlock } from '@/payload/blocks/CallToAction/Component'
 import { ContentBlock } from '@/payload/blocks/Content/Component'
 import { FormBlock } from '@/payload/blocks/Form/Component'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/Component'
+import { GridBlock } from './Grid/Component'
+import { TypographyBlock } from './Typography/Component'
+import { CardBlock } from './Card/Component'
 
 const blockComponents = {
   archive: ArchiveBlock,
@@ -15,6 +18,9 @@ const blockComponents = {
   cta: CallToActionBlock,
   formBlock: FormBlock,
   mediaBlock: MediaBlock,
+  grid: GridBlock,
+  typography: TypographyBlock,
+  card: CardBlock,
 }
 
 export const RenderBlocks: React.FC<{
@@ -36,7 +42,6 @@ export const RenderBlocks: React.FC<{
             if (Block) {
               return (
                 <div className="my-16" key={index}>
-                  {/* @ts-expect-error */}
                   <Block {...block} />
                 </div>
               )

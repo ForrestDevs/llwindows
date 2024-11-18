@@ -16,12 +16,16 @@ export const hero: Field = {
     {
       name: 'type',
       type: 'select',
-      defaultValue: 'lowImpact',
+      defaultValue: 'standard',
       label: 'Type',
       options: [
         {
           label: 'None',
           value: 'none',
+        },
+        {
+          label: 'Standard',
+          value: 'standard',
         },
         {
           label: 'High Impact',
@@ -39,6 +43,22 @@ export const hero: Field = {
       required: true,
     },
     {
+      name: 'title',
+      type: 'text',
+      label: 'Title',
+      admin: {
+        condition: (_, { type } = {}) => ['none', 'standard'].includes(type),
+      },
+    },
+    {
+      name: 'description',
+      type: 'textarea',
+      label: 'Description',
+      admin: {
+        condition: (_, { type } = {}) => ['none', 'standard'].includes(type),
+      },
+    },
+    {
       name: 'richText',
       type: 'richText',
       editor: lexicalEditor({
@@ -52,6 +72,9 @@ export const hero: Field = {
         },
       }),
       label: false,
+      admin: {
+        condition: (_, { type } = {}) => !['none', 'standard'].includes(type),
+      },
     },
     linkGroup({
       overrides: {
@@ -62,7 +85,7 @@ export const hero: Field = {
       name: 'media',
       type: 'upload',
       admin: {
-        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact'].includes(type),
+        condition: (_, { type } = {}) => ['highImpact', 'mediumImpact', 'standard'].includes(type),
       },
       relationTo: 'media',
       required: true,

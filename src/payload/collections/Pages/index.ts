@@ -12,6 +12,7 @@ import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '@/lib/utilities/generatePreviewPath'
 import { revalidatePage } from './hooks/revalidatePage'
 
+
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -20,6 +21,11 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { hero } from '@/payload/heros/config'
+import { Testimonials } from '@/payload/blocks/Testimonials/config'
+import { Typography } from '@/payload/blocks/Typography/config'
+import Grid from '@/payload/blocks/Grid/config'
+import { Card } from '@/payload/blocks/Card/config'
+
 export const Pages: CollectionConfig = {
   slug: 'pages',
   access: {
@@ -68,7 +74,7 @@ export const Pages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, Testimonials, Grid, Card, Typography],
               required: true,
             },
           ],

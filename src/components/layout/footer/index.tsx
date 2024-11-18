@@ -1,11 +1,12 @@
 import { getCachedGlobal } from '@/lib/utilities/getGlobals'
-import Link from 'next/link'
 import React from 'react'
 
 import type { Footer } from '@/payload-types'
 
 import { ThemeSelector } from '@/lib/providers/Theme/ThemeSelector'
 import { CMSLink } from '@/payload/components/Link'
+import Link from 'next/link'
+import { Phone, Mail, Clock } from 'lucide-react'
 
 export async function Footer() {
   const footer: Footer = await getCachedGlobal('footer')()
@@ -13,25 +14,108 @@ export async function Footer() {
   const navItems = footer?.navItems || []
 
   return (
-    <footer className="border-t border-border bg-black dark:bg-card text-white">
-      <div className="container py-8 gap-8 flex flex-col md:flex-row md:justify-between">
-        <Link className="flex items-center" href="/">
-          <picture>
-            <img
-              alt="Payload Logo"
-              className="max-w-[6rem] invert-0"
-              src="https://raw.githubusercontent.com/payloadcms/payload/main/packages/payload/src/admin/assets/images/payload-logo-light.svg"
-            />
-          </picture>
-        </Link>
-
-        <div className="flex flex-col-reverse items-start md:flex-row gap-4 md:items-center">
-          <ThemeSelector />
-          <nav className="flex flex-col md:flex-row gap-4">
-            {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />
-            })}
-          </nav>
+    <footer className="bg-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Crystal Clear Windows</h2>
+            <ul className="space-y-2">
+              <li className="flex items-center text-gray-600">
+                <Phone className="h-5 w-5 mr-2 text-blue-500" />
+                <span>(555) 123-4567</span>
+              </li>
+              <li className="flex items-center text-gray-600">
+                <Mail className="h-5 w-5 mr-2 text-blue-500" />
+                <a href="mailto:info@crystalclearwindows.com" className="hover:text-blue-500">
+                  info@crystalclearwindows.com
+                </a>
+              </li>
+              <li className="flex items-start text-gray-600">
+                <Clock className="h-5 w-5 mr-2 mt-1 text-blue-500" />
+                <div>
+                  <p>Mon-Fri: 8am - 6pm</p>
+                  <p>Sat: 9am - 3pm</p>
+                  <p>Sun: Closed</p>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Our Services</h2>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/services#residential" className="text-gray-600 hover:text-blue-500">
+                  Residential Window Cleaning
+                </Link>
+              </li>
+              <li>
+                <Link href="/services#commercial" className="text-gray-600 hover:text-blue-500">
+                  Commercial Window Cleaning
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services#pressure-washing"
+                  className="text-gray-600 hover:text-blue-500"
+                >
+                  Pressure Washing
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services#gutter-cleaning"
+                  className="text-gray-600 hover:text-blue-500"
+                >
+                  Gutter Cleaning
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services#solar-panel-cleaning"
+                  className="text-gray-600 hover:text-blue-500"
+                >
+                  Solar Panel Cleaning
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Links</h2>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/" className="text-gray-600 hover:text-blue-500">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-gray-600 hover:text-blue-500">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="text-gray-600 hover:text-blue-500">
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-gray-600 hover:text-blue-500">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/quote" className="text-gray-600 hover:text-blue-500">
+                  Get a Quote
+                </Link>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div className="border-t border-gray-200 py-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-sm text-gray-500 text-center">
+            © 2024 Crystal Clear Windows. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
