@@ -10,6 +10,8 @@ export const TYPOGRAPHY_BLOCK_SLUG = 'typography' as const
 export const CARD_BLOCK_SLUG = 'card' as const
 export const GRID_BLOCK_SLUG = 'grid' as const
 export const CONTACT_FORM_BLOCK_SLUG = 'contact-form' as const
+export const TEAM_BLOCK_SLUG = 'team' as const
+export const QUOTE_FORM_BLOCK_SLUG = 'quote-form' as const
 // Add other block slugs here as they are created
 // For example:
 // export const CONTENT_BLOCK_SLUG = 'content-block'

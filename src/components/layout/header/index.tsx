@@ -25,23 +25,20 @@ export async function Header() {
               <MobileMenuButton />
             </div>
             <nav className="hidden md:flex space-x-10">
+              <Link href="/" className="text-base font-medium text-gray-500 hover:text-gray-900">
+                Home
+              </Link>
               <Link
-                href="/test"
+                href="/services"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                Home
+                Services
               </Link>
               <Link
                 href="/test/about"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 About
-              </Link>
-              <Link
-                href="/test/services"
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                Services
               </Link>
               <Link
                 href="/test/contacts"

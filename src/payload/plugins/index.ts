@@ -27,6 +27,10 @@ export const plugins: Plugin[] = [
   redirectsPlugin({
     collections: ['pages', 'posts'],
     overrides: {
+      admin: {
+        hidden: true,
+        group: 'Admin',
+      },
       // @ts-expect-error
       fields: ({ defaultFields }) => {
         return defaultFields.map((field) => {
@@ -53,36 +57,39 @@ export const plugins: Plugin[] = [
     generateTitle,
     generateURL,
   }),
-  formBuilderPlugin({
-    fields: {
-      payment: false,
-    },
-    formOverrides: {
-      fields: ({ defaultFields }) => {
-        return defaultFields.map((field) => {
-          if ('name' in field && field.name === 'confirmationMessage') {
-            return {
-              ...field,
-              editor: lexicalEditor({
-                features: ({ rootFeatures }) => {
-                  return [
-                    ...rootFeatures,
-                    FixedToolbarFeature(),
-                    HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-                  ]
-                },
-              }),
-            }
-          }
-          return field
-        })
-      },
-    },
-  }),
+  // formBuilderPlugin({
+  //   fields: {
+  //     payment: false,
+  //   },
+  //   formOverrides: {
+  //     fields: ({ defaultFields }) => {
+  //       return defaultFields.map((field) => {
+  //         if ('name' in field && field.name === 'confirmationMessage') {
+  //           return {
+  //             ...field,
+  //             editor: lexicalEditor({
+  //               features: ({ rootFeatures }) => {
+  //                 return [
+  //                   ...rootFeatures,
+  //                   FixedToolbarFeature(),
+  //                   HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
+  //                 ]
+  //               },
+  //             }),
+  //           }
+  //         }
+  //         return field
+  //       })
+  //     },
+  //   },
+  // }),
   searchPlugin({
     collections: ['posts'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
+      admin: {
+        group: 'Admin',
+      },
       fields: ({ defaultFields }) => {
         return [...defaultFields, ...searchFields]
       },

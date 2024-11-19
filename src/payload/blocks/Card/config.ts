@@ -4,6 +4,22 @@ import { linkGroup } from '@/payload/fields/linkGroup'
 
 export const iconOptions = [
   {
+    label: 'Check Mark',
+    value: 'check-mark',
+  },
+  {
+    label: 'Aches',
+    value: 'aches',
+  },
+  {
+    label: 'Leaf',
+    value: 'leaf',
+  },
+  {
+    label: 'Users',
+    value: 'users',
+  },
+  {
     label: 'Moon',
     value: 'moon',
   },
@@ -12,8 +28,28 @@ export const iconOptions = [
     value: 'heart-eyes',
   },
   {
+    label: 'Heart',
+    value: 'heart',
+  },
+  {
+    label: 'Star',
+    value: 'star',
+  },
+  {
+    label: 'Sleeping',
+    value: 'sleeping',
+  },
+  {
+    label: 'Stress',
+    value: 'stress',
+  },
+  {
     label: 'Swimming',
     value: 'swimming',
+  },
+  {
+    label: 'Sick',
+    value: 'sick',
   },
   {
     label: 'Walking',
@@ -27,57 +63,34 @@ export const iconOptions = [
     label: 'Theater Masks',
     value: 'theater-masks',
   },
-  {
-    label: 'Heart',
-    value: 'heart',
-  },
-  {
-    label: 'Sleeping',
-    value: 'sleeping',
-  },
-  {
-    label: 'Stress',
-    value: 'stress',
-  },
-  {
-    label: 'Aches',
-    value: 'aches',
-  },
-  {
-    label: 'Sick',
-    value: 'sick',
-  },
 ]
 
 export const Card: Block = {
   slug: CARD_BLOCK_SLUG,
+  interfaceName: 'CardBlock',
   fields: [
     {
       name: 'type',
       type: 'select',
-      defaultValue: 'icon',
+      defaultValue: 'text',
       options: [
+        {
+          label: 'Text',
+          value: 'text',
+        },
         {
           label: 'Icon',
           value: 'icon',
         },
         {
-          label: 'Product',
-          value: 'product',
-        },
-        {
           label: 'Service',
           value: 'service',
         },
+        {
+          label: 'Step',
+          value: 'step',
+        },
       ],
-    },
-    {
-      name: 'icon',
-      type: 'select',
-      options: iconOptions,
-      admin: {
-        condition: (_, { type }) => type === 'icon',
-      },
     },
     {
       name: 'title',
@@ -86,6 +99,14 @@ export const Card: Block = {
     {
       name: 'description',
       type: 'textarea',
+    },
+    {
+      name: 'icon',
+      type: 'select',
+      options: iconOptions,
+      admin: {
+        condition: (_, { type }) => type === 'icon',
+      },
     },
     {
       name: 'media',
@@ -104,5 +125,4 @@ export const Card: Block = {
       },
     }),
   ],
-  interfaceName: 'CardBlock',
 }

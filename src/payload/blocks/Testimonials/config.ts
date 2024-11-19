@@ -4,18 +4,31 @@ import { link } from '@/payload/fields/link'
 
 export const Testimonials: Block = {
   slug: TESTIMONIALS_BLOCK_SLUG,
+  interfaceName: 'TestimonialsBlock',
   fields: [
     {
       name: 'title',
       type: 'text',
       label: 'Title',
     },
-    {
-      name: 'body',
-      type: 'textarea',
-      label: 'Body',
-    },
-    link(),
+    // {
+    //   name: 'body',
+    //   type: 'textarea',
+    //   label: 'Body',
+    // },
+    // {
+    //   name: 'showLink',
+    //   type: 'checkbox',
+    //   label: 'Show Link',
+    //   defaultValue: false,
+    // },
+    // link({
+    //   overrides: {
+    //     admin: {
+    //       condition: (_, siblingData) => siblingData.showLink,
+    //     },
+    //   },
+    // }),
     {
       name: 'populateBy',
       type: 'select',
@@ -56,5 +69,4 @@ export const Testimonials: Block = {
     plural: 'Testimonials',
     singular: 'Testimonial',
   },
-  interfaceName: 'TestimonialsBlock',
 }

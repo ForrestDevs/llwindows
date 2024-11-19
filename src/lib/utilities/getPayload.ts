@@ -1,8 +1,8 @@
 'use server'
 
-import { getPayloadHMR } from '@payloadcms/next/utilities'
+import { getPayload as getPayloadBase } from 'payload'
 import configPromise from '@payload-config'
 
-const getPayload = () => getPayloadHMR({ config: configPromise })
+const getPayload = () => getPayloadBase({ config: configPromise })
 
 export default getPayload

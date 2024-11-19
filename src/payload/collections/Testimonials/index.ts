@@ -11,15 +11,10 @@ const Testimonials: CollectionConfig = {
     update: authenticated,
   },
   admin: {
-    useAsTitle: 'title',
+    useAsTitle: 'author',
+    group: 'Reviews',
   },
   fields: [
-    {
-      label: 'Title',
-      name: 'title',
-      type: 'text',
-      required: true,
-    },
     {
       label: 'Content',
       name: 'content',
@@ -37,12 +32,7 @@ const Testimonials: CollectionConfig = {
       name: 'rating',
       type: 'number',
       required: true,
-    },
-    {
-      label: 'Date',
-      name: 'date',
-      type: 'date',
-      required: true,
+      defaultValue: 5,
     },
   ],
 } as const

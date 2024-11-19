@@ -5,14 +5,14 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
+// import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
+import Team from '../../blocks/Team/config'
 import { slugField } from '../../fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '@/lib/utilities/generatePreviewPath'
 import { revalidatePage } from './hooks/revalidatePage'
-
-
+import { QuoteForm } from '@/payload/blocks/QuoteForm/config'
 import {
   MetaDescriptionField,
   MetaImageField,
@@ -35,6 +35,7 @@ export const Pages: CollectionConfig = {
     update: authenticated,
   },
   admin: {
+    group: 'Content',
     defaultColumns: ['title', 'slug', 'updatedAt'],
     livePreview: {
       url: ({ data }) => {
@@ -74,7 +75,19 @@ export const Pages: CollectionConfig = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock, Testimonials, Grid, Card, Typography],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                // FormBlock,
+                Testimonials,
+                Grid,
+                Card,
+                Typography,
+                Team,
+                QuoteForm,
+              ],
               required: true,
             },
           ],
