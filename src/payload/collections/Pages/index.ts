@@ -88,7 +88,6 @@ export const Pages: CollectionConfig = {
                 Team,
                 QuoteForm,
               ],
-              required: true,
             },
           ],
           label: 'Content',

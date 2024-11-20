@@ -1,10 +1,6 @@
 import { getCachedGlobal } from '@/lib/utilities/getGlobals'
 import React from 'react'
-
 import type { Footer } from '@/payload-types'
-
-import { ThemeSelector } from '@/lib/providers/Theme/ThemeSelector'
-import { CMSLink } from '@/payload/components/Link'
 import Link from 'next/link'
 import { Phone, Mail, Clock } from 'lucide-react'
 
@@ -14,28 +10,27 @@ export async function Footer() {
   const navItems = footer?.navItems || []
 
   return (
-    <footer className="bg-gray-100">
+    <footer className="">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Crystal Clear Windows</h2>
-            <ul className="space-y-2">
+            <h2 className="text-lg font-semibold text-gray-900 mb-4">L&L Window Cleaning Inc.</h2>
+
+            <ul className="space-y-4">
               <li className="flex items-center text-gray-600">
                 <Phone className="h-5 w-5 mr-2 text-blue-500" />
-                <span>(555) 123-4567</span>
+                <span>705-341-4295</span>
               </li>
               <li className="flex items-center text-gray-600">
                 <Mail className="h-5 w-5 mr-2 text-blue-500" />
-                <a href="mailto:info@crystalclearwindows.com" className="hover:text-blue-500">
-                  info@crystalclearwindows.com
+                <a href="mailto:L.LWindowCleaningInc@gmail.com" className="hover:text-blue-500">
+                  L.LWindowCleaningInc@gmail.com
                 </a>
               </li>
               <li className="flex items-start text-gray-600">
                 <Clock className="h-5 w-5 mr-2 mt-1 text-blue-500" />
                 <div>
-                  <p>Mon-Fri: 8am - 6pm</p>
-                  <p>Sat: 9am - 3pm</p>
-                  <p>Sun: Closed</p>
+                  <p>Mon-Fri: 8am - 4:30pm</p>
                 </div>
               </li>
             </ul>
@@ -114,7 +109,7 @@ export async function Footer() {
       <div className="border-t border-gray-200 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-sm text-gray-500 text-center">
-            © 2024 Crystal Clear Windows. All rights reserved.
+            © 2024 L&L Window Cleaning Inc. All rights reserved.
           </p>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import { type PayloadHandler, commitTransaction, initTransaction } from 'payload'
 
-import { seed as seedScript } from '@/payload/endpoints/seed'
+// import { seed as seedScript } from '@/payload/endpoints/seed'
 
 export const seedHandler: PayloadHandler = async (req): Promise<Response> => {
   const { payload, user } = req
@@ -13,7 +13,7 @@ export const seedHandler: PayloadHandler = async (req): Promise<Response> => {
     // Create a transaction so that all seeding happens in one transaction
     await initTransaction(req)
 
-    await seedScript({ payload, req })
+    // await seedScript({ payload, req })
 
     // Finalise transactiojn
     await commitTransaction(req)

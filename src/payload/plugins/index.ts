@@ -12,6 +12,7 @@ import { searchFields } from '@/lib/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/lib/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
+import { BLOG_CATEGORY_SLUG } from '../collections/constants'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
@@ -51,7 +52,7 @@ export const plugins: Plugin[] = [
     },
   }),
   nestedDocsPlugin({
-    collections: ['categories'],
+    collections: [BLOG_CATEGORY_SLUG],
   }),
   seoPlugin({
     generateTitle,

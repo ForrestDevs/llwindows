@@ -26,6 +26,7 @@ import {
   PreviewField,
 } from '@payloadcms/plugin-seo/fields'
 import { slugField } from '../../fields/slug'
+import { BLOG_CATEGORY_SLUG } from '../constants'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -115,7 +116,7 @@ export const Posts: CollectionConfig = {
                 position: 'sidebar',
               },
               hasMany: true,
-              relationTo: 'categories',
+              relationTo: BLOG_CATEGORY_SLUG,
             },
           ],
           label: 'Meta',

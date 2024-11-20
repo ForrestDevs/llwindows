@@ -6,6 +6,7 @@ import {
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
+import { BLOG_CATEGORY_SLUG } from '@/payload/collections/constants'
 
 export const Archive: Block = {
   slug: 'archive',
@@ -64,7 +65,7 @@ export const Archive: Block = {
       },
       hasMany: true,
       label: 'Categories To Show',
-      relationTo: 'categories',
+      relationTo: BLOG_CATEGORY_SLUG,
     },
     {
       name: 'limit',

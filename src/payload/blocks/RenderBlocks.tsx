@@ -3,7 +3,6 @@ import type { Page } from '@/payload-types'
 import { ArchiveBlock } from '@/payload/blocks/ArchiveBlock/Component'
 import { CallToActionBlock } from '@/payload/blocks/CallToAction/Component'
 import { ContentBlock } from '@/payload/blocks/Content/Component'
-// import { FormBlock } from '@/payload/blocks/Form/Component'
 import { MediaBlock } from '@/payload/blocks/MediaBlock/Component'
 import { GridBlock } from './Grid/Component'
 import { TypographyBlock } from './Typography/Component'
@@ -16,7 +15,6 @@ const blockComponents = {
   archive: ArchiveBlock,
   content: ContentBlock,
   cta: CallToActionBlock,
-  // formBlock: FormBlock,
   mediaBlock: MediaBlock,
   grid: GridBlock,
   typography: TypographyBlock,
@@ -27,7 +25,7 @@ const blockComponents = {
 } as const
 
 export const RenderBlocks: React.FC<{
-  blocks: Page['layout'][0][]
+  blocks: NonNullable<Page['layout']>[number][]
 }> = (props) => {
   const { blocks } = props
 

@@ -13,11 +13,12 @@ export interface Config {
   collections: {
     pages: Page;
     posts: Post;
-    categories: Category;
     media: Media;
     users: User;
     testimonials: Testimonial;
     'form-submissions': FormSubmission;
+    galleries: Gallery;
+    'blog-categories': BlogCategory;
     redirects: Redirect;
     search: Search;
     'payload-locked-documents': PayloadLockedDocument;
@@ -28,11 +29,12 @@ export interface Config {
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
     posts: PostsSelect<false> | PostsSelect<true>;
-    categories: CategoriesSelect<false> | CategoriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     'form-submissions': FormSubmissionsSelect<false> | FormSubmissionsSelect<true>;
+    galleries: GalleriesSelect<false> | GalleriesSelect<true>;
+    'blog-categories': BlogCategoriesSelect<false> | BlogCategoriesSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     search: SearchSelect<false> | SearchSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
@@ -45,10 +47,12 @@ export interface Config {
   globals: {
     footer: Footer;
     header: Header;
+    'site-settings': Settings;
   };
   globalsSelect: {
     footer: FooterSelect<false> | FooterSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
   };
   locale: null;
   user: User & {
@@ -121,61 +125,63 @@ export interface Page {
       | null;
     media?: (string | null) | Media;
   };
-  layout: (
-    | CallToActionBlock
-    | ContentBlock
-    | MediaBlock
-    | ArchiveBlock
-    | TestimonialsBlock
-    | {
-        title?: string | null;
-        colsSm: number;
-        colsMd: number;
-        colsLg: number;
-        gap?: number | null;
-        content?: CardBlock[] | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'grid';
-      }
-    | CardBlock
-    | TypographyBlock
-    | {
-        title: string;
-        members?:
-          | {
-              name: string;
-              role: string;
-              image: string | Media;
-              bio: {
-                root: {
-                  type: string;
-                  children: {
-                    type: string;
-                    version: number;
+  layout?:
+    | (
+        | CallToActionBlock
+        | ContentBlock
+        | MediaBlock
+        | ArchiveBlock
+        | TestimonialsBlock
+        | {
+            title?: string | null;
+            colsSm: number;
+            colsMd: number;
+            colsLg: number;
+            gap?: number | null;
+            content?: CardBlock[] | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'grid';
+          }
+        | CardBlock
+        | TypographyBlock
+        | {
+            title: string;
+            members?:
+              | {
+                  name: string;
+                  role: string;
+                  image: string | Media;
+                  bio: {
+                    root: {
+                      type: string;
+                      children: {
+                        type: string;
+                        version: number;
+                        [k: string]: unknown;
+                      }[];
+                      direction: ('ltr' | 'rtl') | null;
+                      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+                      indent: number;
+                      version: number;
+                    };
                     [k: string]: unknown;
-                  }[];
-                  direction: ('ltr' | 'rtl') | null;
-                  format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-                  indent: number;
-                  version: number;
-                };
-                [k: string]: unknown;
-              };
-              id?: string | null;
-            }[]
-          | null;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'team';
-      }
-    | {
-        title: string;
-        id?: string | null;
-        blockName?: string | null;
-        blockType: 'quote-form';
-      }
-  )[];
+                  };
+                  id?: string | null;
+                }[]
+              | null;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'team';
+          }
+        | {
+            title: string;
+            id?: string | null;
+            blockName?: string | null;
+            blockType: 'quote-form';
+          }
+      )[]
+    | null;
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;
@@ -387,7 +393,7 @@ export interface ArchiveBlock {
   } | null;
   populateBy?: ('collection' | 'selection') | null;
   relationTo?: 'posts' | null;
-  categories?: (string | Category)[] | null;
+  categories?: (string | BlogCategory)[] | null;
   limit?: number | null;
   selectedDocs?:
     | {
@@ -401,15 +407,18 @@ export interface ArchiveBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories".
+ * via the `definition` "blog-categories".
  */
-export interface Category {
+export interface BlogCategory {
   id: string;
   title: string;
-  parent?: (string | null) | Category;
+  showInFilter?: boolean | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  parent?: (string | null) | BlogCategory;
   breadcrumbs?:
     | {
-        doc?: (string | null) | Category;
+        doc?: (string | null) | BlogCategory;
         url?: string | null;
         label?: string | null;
         id?: string | null;
@@ -441,7 +450,7 @@ export interface Post {
     [k: string]: unknown;
   };
   relatedPosts?: (string | Post)[] | null;
-  categories?: (string | Category)[] | null;
+  categories?: (string | BlogCategory)[] | null;
   meta?: {
     title?: string | null;
     image?: (string | null) | Media;
@@ -623,6 +632,59 @@ export interface FormSubmission {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries".
+ */
+export interface Gallery {
+  id: string;
+  hero: {
+    type: 'none' | 'standard' | 'highImpact' | 'mediumImpact' | 'lowImpact';
+    title?: string | null;
+    description?: string | null;
+    richText?: {
+      root: {
+        type: string;
+        children: {
+          type: string;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    } | null;
+    links?:
+      | {
+          link: {
+            type?: ('reference' | 'custom') | null;
+            newTab?: boolean | null;
+            reference?: {
+              relationTo: 'pages';
+              value: string | Page;
+            } | null;
+            url?: string | null;
+            label: string;
+            appearance?: ('default' | 'outline' | 'secondary' | 'none') | null;
+          };
+          id?: string | null;
+        }[]
+      | null;
+    media?: (string | null) | Media;
+  };
+  title?: string | null;
+  subtitle?: string | null;
+  description?: string | null;
+  slug?: string | null;
+  slugLock?: boolean | null;
+  images?: (string | Media)[] | null;
+  showCaptions?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects".
  */
 export interface Redirect {
@@ -688,10 +750,6 @@ export interface PayloadLockedDocument {
         value: string | Post;
       } | null)
     | ({
-        relationTo: 'categories';
-        value: string | Category;
-      } | null)
-    | ({
         relationTo: 'media';
         value: string | Media;
       } | null)
@@ -706,6 +764,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'form-submissions';
         value: string | FormSubmission;
+      } | null)
+    | ({
+        relationTo: 'galleries';
+        value: string | Gallery;
+      } | null)
+    | ({
+        relationTo: 'blog-categories';
+        value: string | BlogCategory;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -1034,24 +1100,6 @@ export interface PostsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "categories_select".
- */
-export interface CategoriesSelect<T extends boolean = true> {
-  title?: T;
-  parent?: T;
-  breadcrumbs?:
-    | T
-    | {
-        doc?: T;
-        url?: T;
-        label?: T;
-        id?: T;
-      };
-  updatedAt?: T;
-  createdAt?: T;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -1167,6 +1215,66 @@ export interface TestimonialsSelect<T extends boolean = true> {
 export interface FormSubmissionsSelect<T extends boolean = true> {
   form?: T;
   submissionData?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "galleries_select".
+ */
+export interface GalleriesSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        type?: T;
+        title?: T;
+        description?: T;
+        richText?: T;
+        links?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
+            };
+        media?: T;
+      };
+  title?: T;
+  subtitle?: T;
+  description?: T;
+  slug?: T;
+  slugLock?: T;
+  images?: T;
+  showCaptions?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-categories_select".
+ */
+export interface BlogCategoriesSelect<T extends boolean = true> {
+  title?: T;
+  showInFilter?: T;
+  slug?: T;
+  slugLock?: T;
+  parent?: T;
+  breadcrumbs?:
+    | T
+    | {
+        doc?: T;
+        url?: T;
+        label?: T;
+        id?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1295,6 +1403,24 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface Settings {
+  id: string;
+  productsPage?: (string | null) | Page;
+  general?: {
+    appName?: string | null;
+    appDescription?: string | null;
+  };
+  admin?: {
+    email?: string | null;
+    phone_number?: number | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "footer_select".
  */
 export interface FooterSelect<T extends boolean = true> {
@@ -1334,6 +1460,28 @@ export interface HeaderSelect<T extends boolean = true> {
               label?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  productsPage?: T;
+  general?:
+    | T
+    | {
+        appName?: T;
+        appDescription?: T;
+      };
+  admin?:
+    | T
+    | {
+        email?: T;
+        phone_number?: T;
       };
   updatedAt?: T;
   createdAt?: T;

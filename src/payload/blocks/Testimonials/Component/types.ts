@@ -1,3 +1,6 @@
 import type { Page } from '@/payload-types'
 
-export type TestimonialBlockProps = Extract<Page['layout'][0], { blockType: 'testimonials' }>
+export type TestimonialBlockProps = Extract<
+  NonNullable<Page['layout']>[number],
+  { blockType: 'testimonials' }
+>

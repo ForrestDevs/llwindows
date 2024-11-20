@@ -142,7 +142,7 @@ export default function ContactPage() {
       </section>
 
       {/* Map Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+      {/* <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl font-bold mb-8 text-center">Our Service Areas</h2>
           <div className="aspect-w-16 aspect-h-9">
@@ -157,7 +157,7 @@ export default function ContactPage() {
             ></iframe>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Call to Action Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 bg-blue-600 text-white">

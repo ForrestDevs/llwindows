@@ -4,12 +4,10 @@ import { PayloadRedirects } from '@/payload/components/PayloadRedirects'
 import configPromise from '@payload-config'
 import { getPayload } from 'payload'
 import { draftMode } from 'next/headers'
-import { homeStatic } from '@/payload/endpoints/seed/home-static'
 import type { Page as PageType } from '@/payload-types'
 import { RenderBlocks } from '@/payload/blocks/RenderBlocks'
 import { RenderHero } from '@/payload/heros/RenderHero'
 import { generateMeta } from '@/lib/utilities/generateMeta'
-import PageClient from './page.client'
 
 export async function generateStaticParams() {
   const payload = await getPayload({ config: configPromise })
@@ -47,11 +45,6 @@ export default async function Page({ params: paramsPromise }: Args) {
     slug,
   })
 
-  // Remove this code once your website is seeded
-  if (!page && slug === 'home') {
-    page = homeStatic
-  }
-
   if (!page) {
     return <PayloadRedirects url={url} />
   }
@@ -60,12 +53,9 @@ export default async function Page({ params: paramsPromise }: Args) {
 
   return (
     <article className="pb-24">
-      <PageClient />
-      {/* Allows redirects for valid pages too */}
       <PayloadRedirects disableNotFound url={url} />
-
       <RenderHero {...hero} />
-      <RenderBlocks blocks={layout} />
+      <RenderBlocks blocks={layout ?? []} />
     </article>
   )
 }
@@ -76,7 +66,7 @@ export async function generateMetadata({ params: paramsPromise }): Promise<Metad
     slug,
   })
 
-  return generateMeta({ doc: page })
+  return generateMeta({ doc: page, collectionSlug: 'pages' })
 }
 
 const queryPageBySlug = cache(async ({ slug }: { slug: string }) => {

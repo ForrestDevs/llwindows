@@ -35,25 +35,25 @@ export async function Header() {
                 Services
               </Link>
               <Link
-                href="/test/about"
+                href="/about"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 About
               </Link>
               <Link
-                href="/test/contacts"
+                href="/contact"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Contact
               </Link>
               <Link
-                href="/test/blog"
+                href="/blog"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Blog
               </Link>
               <Link
-                href="/test/gallery"
+                href="/gallery"
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
                 Gallery
