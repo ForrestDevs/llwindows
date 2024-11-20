@@ -5,6 +5,17 @@ import { RenderBlocks } from '@/payload/blocks/RenderBlocks'
 import { queryPageBySlug } from '@/lib/utilities/queryPageBySlug'
 import GalleryFilters from '@/components/layout/gallery/filter'
 import { GalleryArchive } from '@/components/layout/gallery/gallery-archive'
+import { generateMeta } from '@/lib/utilities/generateMeta'
+import { Metadata } from 'next/types'
+
+export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {
+  const { slug = 'gallery' } = await paramsPromise
+  const page = await queryPageBySlug({
+    slug,
+  })
+
+  return generateMeta({ doc: page, collectionSlug: 'pages' })
+}
 
 export default async function GalleryHome() {
   const payload = await getPayload()

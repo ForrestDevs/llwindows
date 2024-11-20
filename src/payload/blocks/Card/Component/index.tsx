@@ -21,7 +21,18 @@ import {
   FaUserInjured,
 } from 'react-icons/fa'
 
-import { Star, Leaf, Users, CheckCircle } from 'lucide-react'
+import {
+  Star,
+  Leaf,
+  Users,
+  CheckCircle,
+  Briefcase,
+  User,
+  Building,
+  MapPin,
+  Phone,
+  Mail,
+} from 'lucide-react'
 
 import { BsEmojiHeartEyesFill } from 'react-icons/bs'
 import { LiaWaveSquareSolid } from 'react-icons/lia'
@@ -35,7 +46,22 @@ export const CardBlock: React.FC<
     index?: number
   }
 > = async (props) => {
-  const { type, title, description, icon, media, links, index } = props
+  const {
+    type,
+    title,
+    description,
+    icon,
+    media,
+    links,
+    index,
+    divisionLead,
+    serviceArea,
+    serviceAreaImage,
+    officeLocation,
+    phoneNumber,
+    email,
+    services,
+  } = props
 
   let Icon: React.JSX.Element
 
@@ -97,30 +123,102 @@ export const CardBlock: React.FC<
 
   return (
     <Card className="h-full">
-      <CardContent className="p-6 text-center h-full flex flex-col">
-        {media && <Media resource={media} imgClassName="w-full h-48 object-cover" />}
-        {type === 'icon' && Icon}
-        {type === 'step' && (
-          <div className="text-4xl font-bold text-blue-500 mb-4">{index ?? 0}</div>
-        )}
-        {title && (
-          <CardTitle className={cn(isService && serviceTitleClassName, 'text-xl font-bold mb-2')}>
-            {title}
-          </CardTitle>
-        )}
-        {description && (
-          <CardDescription className={cn(isService && serviceDescriptionClassName, 'flex-grow')}>
-            {description}
-          </CardDescription>
-        )}
-        {links && Array.isArray(links) && links.length > 0 && (
-          <CardFooter className="mt-4 p-0">
-            {links.map((link) => (
-              <CMSLink key={link.id} {...link.link} />
-            ))}
-          </CardFooter>
-        )}
-      </CardContent>
+      {type === 'division' ? (
+        <>
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">{title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {serviceAreaImage && (
+                <Media
+                  resource={serviceAreaImage}
+                  imgClassName="w-full h-48 object-cover rounded-lg"
+                  className="w-full rounded-lg"
+                />
+              )}
+              <div className="space-y-4">
+                <div className="flex items-start space-x-2">
+                  <MapPin className="w-5 h-5 text-gray-500 dark:text-gray-400 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">
+                      Service Areas
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{serviceArea}</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <Building className="w-5 h-5 text-gray-500 dark:text-gray-400 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">
+                      Office Location
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{officeLocation}</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-2">
+                  <Briefcase className="w-5 h-5 text-gray-500 dark:text-gray-400 mt-0.5" />
+                  <div>
+                    <h3 className="font-semibold mb-1 text-gray-900 dark:text-gray-100">
+                      Services Offered
+                    </h3>
+                    <ul className="text-sm text-gray-600 dark:text-gray-300 list-disc list-inside">
+                      {services?.map((service, index) => <li key={index}>{service.service}</li>)}
+                    </ul>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <User className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                  <div>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100">
+                      Lead Operator
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{divisionLead}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Phone className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                  <p className="text-sm text-gray-600 dark:text-gray-300">{phoneNumber}</p>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Mail className="w-5 h-5 text-gray-500 dark:text-gray-400" />
+                  <a
+                    href={`mailto:${email}`}
+                    className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
+                  >
+                    {email}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </>
+      ) : (
+        <CardContent className="p-6 text-center h-full flex flex-col">
+          {media && <Media resource={media} imgClassName="w-full h-48 object-cover" />}
+          {type === 'icon' && Icon}
+          {type === 'step' && (
+            <div className="text-4xl font-bold text-blue-500 mb-4">{index ?? 0}</div>
+          )}
+          {title && (
+            <CardTitle className={cn(isService && serviceTitleClassName, 'text-xl font-bold mb-2')}>
+              {title}
+            </CardTitle>
+          )}
+          {description && (
+            <CardDescription className={cn(isService && serviceDescriptionClassName, 'flex-grow')}>
+              {description}
+            </CardDescription>
+          )}
+          {links && Array.isArray(links) && links.length > 0 && (
+            <CardFooter className="mt-4 p-0">
+              {links.map((link) => (
+                <CMSLink key={link.id} {...link.link} />
+              ))}
+            </CardFooter>
+          )}
+        </CardContent>
+      )}
     </Card>
   )
 }

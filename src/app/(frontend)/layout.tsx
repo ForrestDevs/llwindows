@@ -57,11 +57,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: initData?.general?.appName as string,
     description: initData?.general?.appDescription as string,
-    metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL || 'https://payloadcms.com'),
+    metadataBase: new URL(process.env.NEXT_PUBLIC_SERVER_URL),
     openGraph: mergeOpenGraph(),
     twitter: {
       card: 'summary_large_image',
-      creator: 'BonaVista Leisurescapes',
+      creator: 'L&L Window Cleaning Inc.',
     },
   }
 }

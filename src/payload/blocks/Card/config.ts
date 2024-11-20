@@ -87,6 +87,10 @@ export const Card: Block = {
           value: 'service',
         },
         {
+          label: 'Division',
+          value: 'division',
+        },
+        {
           label: 'Step',
           value: 'step',
         },
@@ -99,6 +103,65 @@ export const Card: Block = {
     {
       name: 'description',
       type: 'textarea',
+      admin: {
+        condition: (_, { type }) => type !== 'division',
+      },
+    },
+    {
+      name: 'divisionLead',
+      type: 'text',
+      admin: {
+        condition: (_, { type }) => type === 'division',
+      },
+    },
+    {
+      name: 'officeLocation',
+      type: 'text',
+      admin: {
+        condition: (_, { type }) => type === 'division',
+      },
+    },
+    {
+      name: 'services',
+      type: 'array',
+      fields: [
+        {
+          name: 'service',
+          type: 'text',
+        },
+      ],
+      admin: {
+        condition: (_, { type }) => type === 'division',
+      },
+    },
+    {
+      name: 'serviceArea',
+      type: 'text',
+      admin: {
+        condition: (_, { type }) => type === 'division',
+      },
+    },
+    {
+      name: 'serviceAreaImage',
+      type: 'upload',
+      relationTo: 'media',
+      admin: {
+        condition: (_, { type }) => type === 'division',
+      },
+    },
+    {
+      name: 'phoneNumber',
+      type: 'text',
+      admin: {
+        condition: (_, { type }) => type === 'division',
+      },
+    },
+    {
+      name: 'email',
+      type: 'email',
+      admin: {
+        condition: (_, { type }) => type === 'division',
+      },
     },
     {
       name: 'icon',

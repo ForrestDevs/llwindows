@@ -14,7 +14,7 @@ import { Page, Post } from '@/payload-types'
 import { BLOG_CATEGORY_SLUG } from '../collections/constants'
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
-  return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
+  return doc?.title ? `${doc.title} | L&L Window Cleaning Inc.` : 'L&L Window Cleaning Inc.'
 }
 
 const generateURL: GenerateURL<Post | Page> = ({ doc }) => {

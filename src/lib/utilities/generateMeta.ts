@@ -1,10 +1,10 @@
 import type { Metadata } from 'next'
-import type { Page, Post } from '@/payload-types'
+import type { Page, Post, Gallery } from '@/payload-types'
 import { mergeOpenGraph } from './mergeOpenGraph'
 import { generateMetadata } from '@/app/(frontend)/layout'
 
 export const generateMeta = async (args: {
-  doc: Page | Post | null
+  doc: Page | Post | Gallery | null
   collectionSlug: string
 }): Promise<Metadata> => {
   const { doc, collectionSlug } = args || {}
@@ -19,10 +19,10 @@ export const generateMeta = async (args: {
     `${process.env.NEXT_PUBLIC_SERVER_URL}${doc.meta.image.url}`
 
   const title = doc?.meta?.title
-    ? doc?.meta?.title + ` | ${defaultMetaData.title}`
+    ? doc?.meta?.title
     : defaultMetaData.title
       ? defaultMetaData.title
-      : 'Liquid Logic'
+      : 'L&L Window Cleaning Inc.'
 
   const url = `${process.env.NEXT_PUBLIC_PUBLIC_URL}/${collectionSlug}/${doc?.id}`
 
@@ -31,7 +31,7 @@ export const generateMeta = async (args: {
     description: doc?.meta?.description || defaultMetaData.description,
     openGraph: mergeOpenGraph({
       title,
-      description: doc?.meta?.description ?? 'Liquid Logic',
+      description: doc?.meta?.description ?? 'L&L Window Cleaning Inc.',
       url,
       images: ogImage
         ? [

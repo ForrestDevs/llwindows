@@ -7,6 +7,8 @@ import { PayloadRedirects } from '@/payload/components/PayloadRedirects'
 import { RenderHero } from '@/payload/heros/RenderHero'
 import { queryPageBySlug } from '@/lib/utilities/queryPageBySlug'
 import { RenderBlocks } from '@/payload/blocks/RenderBlocks'
+import { Metadata } from 'next/types'
+import { generateMeta } from '@/lib/utilities/generateMeta'
 
 // export const dynamic = 'force-static'
 export const revalidate = 600
@@ -15,6 +17,15 @@ type Args = {
   searchParams: Promise<{
     [key: string]: string | undefined
   }>
+}
+
+export async function generateMetadata({ params: paramsPromise }): Promise<Metadata> {
+  const { slug = 'blog' } = await paramsPromise
+  const page = await queryPageBySlug({
+    slug,
+  })
+
+  return generateMeta({ doc: page, collectionSlug: 'pages' })
 }
 
 export default async function Page({ searchParams }: Args) {

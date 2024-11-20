@@ -12,12 +12,6 @@ export const SiteSettings: GlobalConfig = {
   },
   fields: [
     {
-      name: 'productsPage',
-      type: 'relationship',
-      label: 'Products page',
-      relationTo: 'pages',
-    },
-    {
       type: 'tabs',
       label: 'Settings',
       tabs: [

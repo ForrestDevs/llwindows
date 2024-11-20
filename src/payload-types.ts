@@ -483,9 +483,21 @@ export interface Testimonial {
  * via the `definition` "CardBlock".
  */
 export interface CardBlock {
-  type?: ('text' | 'icon' | 'service' | 'step') | null;
+  type?: ('text' | 'icon' | 'service' | 'division' | 'step') | null;
   title?: string | null;
   description?: string | null;
+  divisionLead?: string | null;
+  officeLocation?: string | null;
+  services?:
+    | {
+        service?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  serviceArea?: string | null;
+  serviceAreaImage?: (string | null) | Media;
+  phoneNumber?: string | null;
+  email?: string | null;
   icon?:
     | (
         | 'check-mark'
@@ -640,6 +652,11 @@ export interface Gallery {
   slugLock?: boolean | null;
   images?: (string | Media)[] | null;
   showCaptions?: boolean | null;
+  meta?: {
+    title?: string | null;
+    image?: (string | null) | Media;
+    description?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
 }
@@ -909,6 +926,18 @@ export interface PagesSelect<T extends boolean = true> {
                           type?: T;
                           title?: T;
                           description?: T;
+                          divisionLead?: T;
+                          officeLocation?: T;
+                          services?:
+                            | T
+                            | {
+                                service?: T;
+                                id?: T;
+                              };
+                          serviceArea?: T;
+                          serviceAreaImage?: T;
+                          phoneNumber?: T;
+                          email?: T;
                           icon?: T;
                           media?: T;
                           links?:
@@ -939,6 +968,18 @@ export interface PagesSelect<T extends boolean = true> {
               type?: T;
               title?: T;
               description?: T;
+              divisionLead?: T;
+              officeLocation?: T;
+              services?:
+                | T
+                | {
+                    service?: T;
+                    id?: T;
+                  };
+              serviceArea?: T;
+              serviceAreaImage?: T;
+              phoneNumber?: T;
+              email?: T;
               icon?: T;
               media?: T;
               links?:
@@ -1164,6 +1205,15 @@ export interface GalleriesSelect<T extends boolean = true> {
   slugLock?: T;
   images?: T;
   showCaptions?: T;
+  meta?:
+    | T
+    | {
+        overview?: T;
+        title?: T;
+        image?: T;
+        description?: T;
+        preview?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
 }
@@ -1317,7 +1367,6 @@ export interface Header {
  */
 export interface Settings {
   id: string;
-  productsPage?: (string | null) | Page;
   general?: {
     appName?: string | null;
     appDescription?: string | null;
@@ -1380,7 +1429,6 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
-  productsPage?: T;
   general?:
     | T
     | {

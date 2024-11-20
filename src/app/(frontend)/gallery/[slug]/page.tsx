@@ -6,18 +6,26 @@ import { PayloadRedirects } from '@/payload/components/PayloadRedirects'
 import { draftMode, headers } from 'next/headers'
 import { RenderHero } from '@/payload/heros/RenderHero'
 import { cn } from '@/lib/utilities/cn'
+import { generateMeta } from '@/lib/utilities/generateMeta'
 
-// export async function generateStaticParams() {
-//   const payload = await getPayload()
-//   const posts = await payload.find({
-//     collection: 'posts',
-//     draft: false,
-//     limit: 1000,
-//     overrideAccess: false,
-//   })
+export async function generateStaticParams() {
+  const payload = await getPayload()
 
-//   return posts.docs?.map(({ slug }) => slug)
-// }
+  const { docs } = await payload.find({
+    collection: 'galleries',
+    draft: false,
+    limit: 1000,
+    overrideAccess: false,
+  })
+
+  const gallerySlugs = docs.map((gallery) => {
+    return {
+      slug: gallery.slug ?? '',
+    }
+  })
+
+  return gallerySlugs
+}
 
 type Params = Promise<{ slug: string | undefined }>
 
@@ -81,11 +89,6 @@ const queryGalleryBySlug = cache(async ({ slug }: { slug: string }) => {
 export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
   const { slug } = await params
   const gallery = await queryGalleryBySlug({ slug: slug ?? '' })
-    
-  return {
-    title: gallery?.title,
-    description: gallery?.description,
-  }
 
-  //   return generateMeta({ doc: post, collectionSlug: 'posts' })
+  return generateMeta({ doc: gallery, collectionSlug: 'galleries' })
 }
