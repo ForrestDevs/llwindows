@@ -18,6 +18,8 @@ import { SlugComponent as SlugComponent_2f7cb6d15a7be4cbd9d669ac9f96d997 } from 
 import { HorizontalRuleFeatureClient as HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BlocksFeatureClient as BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { LinkToDoc as LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634 } from '@payloadcms/plugin-search/client'
+import { default as default_09ede88f26b0ca35dce1f69cbc78de8b } from '@/payload/admin/components/icon'
+import { default as default_10f1ada27f4e31138ceac5f689c5a1d4 } from '@/payload/admin/components/logo'
 
 export const importMap = {
   "@payloadcms/richtext-lexical/rsc#RscEntryLexicalCell": RscEntryLexicalCell_44fe37237e0ebf4470c9990d8cb7b07e,
@@ -39,5 +41,7 @@ export const importMap = {
   "@/payload/fields/slug/SlugComponent#SlugComponent": SlugComponent_2f7cb6d15a7be4cbd9d669ac9f96d997,
   "@payloadcms/richtext-lexical/client#HorizontalRuleFeatureClient": HorizontalRuleFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BlocksFeatureClient": BlocksFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634
+  "@payloadcms/plugin-search/client#LinkToDoc": LinkToDoc_aead06e4cbf6b2620c5c51c9ab283634,
+  "@/payload/admin/components/icon#default": default_09ede88f26b0ca35dce1f69cbc78de8b,
+  "@/payload/admin/components/logo#default": default_10f1ada27f4e31138ceac5f689c5a1d4
 }

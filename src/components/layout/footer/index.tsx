@@ -19,13 +19,15 @@ export async function Footer() {
             <ul className="space-y-4">
               <li className="flex items-center text-gray-600">
                 <Phone className="h-5 w-5 mr-2 text-blue-500" />
-                <span>705-341-4295</span>
+                <Link href="tel:705-341-4295" className="hover:text-blue-500">
+                  705-341-4295
+                </Link>
               </li>
               <li className="flex items-center text-gray-600">
                 <Mail className="h-5 w-5 mr-2 text-blue-500" />
-                <a href="mailto:L.LWindowCleaningInc@gmail.com" className="hover:text-blue-500">
+                <Link href="mailto:L.LWindowCleaningInc@gmail.com" className="hover:text-blue-500">
                   L.LWindowCleaningInc@gmail.com
-                </a>
+                </Link>
               </li>
               <li className="flex items-start text-gray-600">
                 <Clock className="h-5 w-5 mr-2 mt-1 text-blue-500" />
@@ -98,7 +100,7 @@ export async function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/quote" className="text-gray-600 hover:text-blue-500">
+                <Link href="/contact#quote-form" className="text-gray-600 hover:text-blue-500">
                   Get a Quote
                 </Link>
               </li>

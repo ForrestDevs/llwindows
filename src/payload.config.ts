@@ -9,39 +9,13 @@ import { defaultLexical } from '@/payload/fields/defaultLexical'
 import { globals } from './payload/globals'
 import { collections } from './payload/collections'
 import { resendAdapter } from '@payloadcms/email-resend'
+import { adminConfig } from './payload/admin/config'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  admin: {
-    importMap: {
-      baseDir: path.resolve(dirname),
-    },
-    user: Users.slug,
-    livePreview: {
-      breakpoints: [
-        {
-          label: 'Mobile',
-          name: 'mobile',
-          width: 375,
-          height: 667,
-        },
-        {
-          label: 'Tablet',
-          name: 'tablet',
-          width: 768,
-          height: 1024,
-        },
-        {
-          label: 'Desktop',
-          name: 'desktop',
-          width: 1440,
-          height: 900,
-        },
-      ],
-    },
-  },
+  ...adminConfig,
   editor: defaultLexical,
   db: mongooseAdapter({
     url: process.env.DATABASE_URI,

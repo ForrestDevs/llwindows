@@ -4,6 +4,9 @@ import { SITE_SETTINGS_SLUG } from '../constants'
 
 export const SiteSettings: GlobalConfig = {
   slug: SITE_SETTINGS_SLUG,
+  admin: {
+    group: 'Admin',
+  },
   access: {
     read: () => true,
   },

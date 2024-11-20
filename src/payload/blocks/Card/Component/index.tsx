@@ -133,7 +133,7 @@ export const CardBlock: React.FC<
               {serviceAreaImage && (
                 <Media
                   resource={serviceAreaImage}
-                  imgClassName="w-full h-48 object-cover rounded-lg"
+                  imgClassName="w-full h-[300px] object-fill rounded-lg"
                   className="w-full rounded-lg"
                 />
               )}
@@ -195,7 +195,7 @@ export const CardBlock: React.FC<
         </>
       ) : (
         <CardContent className="p-6 text-center h-full flex flex-col">
-          {media && <Media resource={media} imgClassName="w-full h-48 object-cover" />}
+          {media && <Media resource={media} imgClassName="w-full object-fit" />}
           {type === 'icon' && Icon}
           {type === 'step' && (
             <div className="text-4xl font-bold text-blue-500 mb-4">{index ?? 0}</div>
