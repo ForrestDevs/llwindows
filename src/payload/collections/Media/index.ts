@@ -1,21 +1,16 @@
 import type { CollectionConfig } from 'payload'
-
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
   lexicalEditor,
 } from '@payloadcms/richtext-lexical'
-import path from 'path'
-import { fileURLToPath } from 'url'
-
 import { anyone } from '../../access/anyone'
 import { authenticated } from '../../access/authenticated'
-
-const filename = fileURLToPath(import.meta.url)
-const dirname = path.dirname(filename)
+import { formatFilenameHook } from './hooks/formatFilename'
+import { MEDIA_SLUG } from '../constants'
 
 export const Media: CollectionConfig = {
-  slug: 'media',
+  slug: MEDIA_SLUG,
   access: {
     create: authenticated,
     delete: authenticated,
@@ -38,36 +33,38 @@ export const Media: CollectionConfig = {
       }),
     },
   ],
+  hooks: {
+    beforeValidate: [formatFilenameHook],
+  },
   upload: {
-    // Upload to the public/media directory in Next.js making them publicly accessible even outside of Payload
-    staticDir: path.resolve(dirname, '../../public/media'),
     adminThumbnail: 'thumbnail',
     imageSizes: [
       {
         name: 'thumbnail',
-        width: 300,
-      },
-      {
-        name: 'square',
+        fit: 'cover',
         width: 500,
-        height: 500,
-      },
-      {
-        name: 'small',
-        width: 600,
-      },
-      {
-        name: 'medium',
-        width: 900,
-      },
-      {
-        name: 'large',
-        width: 1400,
-      },
-      {
-        name: 'xlarge',
-        width: 1920,
+        withoutEnlargement: true,
+        formatOptions: {
+          format: 'webp',
+          options: {
+            quality: 100,
+          },
+        },
       },
     ],
+    formatOptions: {
+      format: 'webp',
+      options: {
+        quality: 80,
+      },
+    },
+    resizeOptions: {
+      width: 2560,
+      withoutEnlargement: true,
+    },
+    bulkUpload: true,
+    disableLocalStorage: true,
+    focalPoint: true,
+    crop: true,
   },
 }

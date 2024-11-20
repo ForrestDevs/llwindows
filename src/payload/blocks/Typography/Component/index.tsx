@@ -100,7 +100,7 @@ export const TypographyBlock: React.FC<
   }
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-8 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       {content}
       {links && links.length > 0 && (
         <div className="flex flex-col sm:flex-row gap-4">

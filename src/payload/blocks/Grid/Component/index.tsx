@@ -11,7 +11,7 @@ export const GridBlock: React.FC<
   const { colsSm, colsMd, colsLg, gap, content, title } = props
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8">
+    <section className="py-8 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-bold text-center mb-12">{title}</h2>
         <Grid

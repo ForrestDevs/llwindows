@@ -40,7 +40,7 @@ export default function BlogFilters({ categories }: { categories: BlogCategory[]
         <Button
           onClick={() => setCurrentCategory({ category: 'all' })}
           className={clsx(
-            'p-7 text-lg rounded-none hover:text-white',
+            'hover:text-white',
             currentCategory === 'all' ? 'bg-primary text-white' : 'bg-gray-200 text-black',
           )}
           variant="default"
@@ -54,7 +54,7 @@ export default function BlogFilters({ categories }: { categories: BlogCategory[]
             key={category.id}
             onClick={() => setCurrentCategory({ category: category.slug })}
             className={clsx(
-              'p-7 text-lg rounded-none hover:text-white',
+              'hover:text-white',
               currentCategory === category.slug
                 ? 'bg-primary text-white'
                 : 'bg-gray-200 text-black',

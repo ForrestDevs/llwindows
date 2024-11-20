@@ -1,9 +1,8 @@
-import { payloadCloudPlugin } from '@payloadcms/payload-cloud'
-import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import { searchPlugin } from '@payloadcms/plugin-search'
+import { s3Storage } from '@payloadcms/storage-s3'
 import { Plugin } from 'payload'
 import { revalidateRedirects } from '@/payload/hooks/revalidateRedirects'
 import { GenerateTitle, GenerateURL } from '@payloadcms/plugin-seo/types'
@@ -25,6 +24,20 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 }
 
 export const plugins: Plugin[] = [
+  s3Storage({
+    collections: {
+      ['media']: true,
+    },
+    bucket: process.env.S3_BUCKET || 'media',
+    config: {
+      endpoint: process.env.S3_ENDPOINT,
+      credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY_ID,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+      },
+      region: process.env.S3_REGION,
+    },
+  }),
   redirectsPlugin({
     collections: ['pages', 'posts'],
     overrides: {
@@ -58,32 +71,6 @@ export const plugins: Plugin[] = [
     generateTitle,
     generateURL,
   }),
-  // formBuilderPlugin({
-  //   fields: {
-  //     payment: false,
-  //   },
-  //   formOverrides: {
-  //     fields: ({ defaultFields }) => {
-  //       return defaultFields.map((field) => {
-  //         if ('name' in field && field.name === 'confirmationMessage') {
-  //           return {
-  //             ...field,
-  //             editor: lexicalEditor({
-  //               features: ({ rootFeatures }) => {
-  //                 return [
-  //                   ...rootFeatures,
-  //                   FixedToolbarFeature(),
-  //                   HeadingFeature({ enabledHeadingSizes: ['h1', 'h2', 'h3', 'h4'] }),
-  //                 ]
-  //               },
-  //             }),
-  //           }
-  //         }
-  //         return field
-  //       })
-  //     },
-  //   },
-  // }),
   searchPlugin({
     collections: ['posts'],
     beforeSync: beforeSyncWithSearch,
@@ -96,5 +83,4 @@ export const plugins: Plugin[] = [
       },
     },
   }),
-  payloadCloudPlugin(),
 ]

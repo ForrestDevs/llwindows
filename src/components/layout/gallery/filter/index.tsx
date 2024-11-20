@@ -28,7 +28,7 @@ export default function GalleryFilters({ collections }: { collections: Gallery[]
             key={collection.id}
             onClick={() => setCurrentCollection({ collection: collection.slug })}
             className={clsx(
-              'p-7 text-lg rounded-none hover:text-white',
+              'hover:text-white',
               currentCollection.collection === collection.slug
                 ? 'bg-primary text-white'
                 : 'bg-gray-200 text-black',
