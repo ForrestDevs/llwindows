@@ -22,8 +22,10 @@ export default async function GalleryHome() {
       </section>
       {docs.length > 0 ? (
         <div className="flex flex-col gap-10">
-          <GalleryFilters collections={docs} />
-          <GalleryArchive collections={docs} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <GalleryFilters collections={docs} />
+            <GalleryArchive collections={docs} />
+          </Suspense>
         </div>
       ) : (
         <div className="container text-center py-12">

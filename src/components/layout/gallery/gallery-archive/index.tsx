@@ -9,6 +9,7 @@ import { buttonVariants } from '@/components/ui/button'
 import { parseAsString, useQueryStates } from 'nuqs'
 
 export function GalleryArchive({ collections }: { collections: Gallery[] }) {
+  
   const [currentCollection] = useQueryStates({
     collection: parseAsString.withDefault(collections[0]?.slug || '').withOptions({
       clearOnDefault: false,
